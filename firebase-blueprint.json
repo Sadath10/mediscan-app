@@ -1,0 +1,115 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User account profile preferences and regional settings",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 256 },
+        "language": { "type": "string", "enum": ["en", "kn"] },
+        "timezone": { "type": "string", "maxLength": 64 },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["uid", "email"]
+    },
+    "UserMedicine": {
+      "title": "UserMedicine",
+      "description": "Personal medicine saved in user cabinet with verified openFDA details",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "medicineName": { "type": "string", "maxLength": 128 },
+        "strength": { "type": "string", "maxLength": 64 },
+        "form": { "type": "string", "maxLength": 64 },
+        "openFdaId": { "type": "string", "maxLength": 128 },
+        "dosageInstructions": { "type": "string", "maxLength": 512 },
+        "startDate": { "type": "string", "maxLength": 32 },
+        "endDate": { "type": "string", "maxLength": 32 },
+        "isActive": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["userId", "medicineName", "strength"]
+    },
+    "Schedule": {
+      "title": "Schedule",
+      "description": "Daily tablet dosage reminder schedule for a medicine",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "medicineId": { "type": "string", "maxLength": 128 },
+        "timesPerDay": { "type": "number" },
+        "times": { "type": "array" },
+        "tabletsPerDose": { "type": "number" },
+        "instructions": { "type": "string", "maxLength": 256 },
+        "status": { "type": "string", "enum": ["active", "paused", "completed"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["userId", "medicineId", "timesPerDay", "times", "tabletsPerDose"]
+    },
+    "DoseLog": {
+      "title": "DoseLog",
+      "description": "Dose administration record and status tracking",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "medicineId": { "type": "string", "maxLength": 128 },
+        "scheduledTime": { "type": "string", "maxLength": 32 },
+        "status": { "type": "string", "enum": ["pending", "taken", "skipped", "snoozed", "missed"] },
+        "takenAt": { "type": "string", "maxLength": 64 },
+        "snoozeUntil": { "type": "string", "maxLength": 64 },
+        "notes": { "type": "string", "maxLength": 256 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["userId", "medicineId", "scheduledTime", "status"]
+    },
+    "GlobalMedicine": {
+      "title": "GlobalMedicine",
+      "description": "Global verified essential medicines catalog synchronized with openFDA, DailyMed, and RxNorm",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 128 },
+        "brand": { "type": "string", "maxLength": 128 },
+        "activeIngredient": { "type": "string", "maxLength": 128 },
+        "strength": { "type": "string", "maxLength": 64 },
+        "dosageForm": { "type": "string", "maxLength": 64 },
+        "verifiedPurposeEn": { "type": "string", "maxLength": 512 },
+        "verifiedPurposeKn": { "type": "string", "maxLength": 512 },
+        "commonInstructionsEn": { "type": "string", "maxLength": 512 },
+        "commonInstructionsKn": { "type": "string", "maxLength": 512 },
+        "precautionsEn": { "type": "string", "maxLength": 512 },
+        "precautionsKn": { "type": "string", "maxLength": 512 },
+        "openFdaId": { "type": "string", "maxLength": 128 },
+        "rxCui": { "type": "string", "maxLength": 64 },
+        "dailymedSetId": { "type": "string", "maxLength": 128 },
+        "source": { "type": "string", "maxLength": 128 },
+        "isVerified": { "type": "boolean" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["name", "activeIngredient", "strength"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "User profile collection"
+    },
+    "/medicines/{medicineId}": {
+      "schema": { "$ref": "#/entities/GlobalMedicine" },
+      "description": "Global verified essential medicines catalog"
+    },
+    "/userMedicines/{medicineId}": {
+      "schema": { "$ref": "#/entities/UserMedicine" },
+      "description": "User personal medicines collection"
+    },
+    "/schedules/{scheduleId}": {
+      "schema": { "$ref": "#/entities/Schedule" },
+      "description": "Medication reminder schedules collection"
+    },
+    "/doseLogs/{logId}": {
+      "schema": { "$ref": "#/entities/DoseLog" },
+      "description": "Individual dose log entries collection"
+    }
+  }
+}

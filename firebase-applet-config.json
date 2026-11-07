@@ -1,0 +1,20 @@
+{
+  "projectId": "praxis-module-d53bd",
+  "appId": "1:1042656437075:web:e6153c7447649a8281b7a6",
+  "apiKey": "AIzaSyCfqJuMGjIkErSV95gL1HWsRKOy2a4Xo2U",
+  "authDomain": "praxis-module-d53bd.firebaseapp.com",
+  "firestoreDatabaseId": "ai-studio-mediscanxaimedic-b05c27c1-61fd-41dd-b58a-1d9f53781260",
+  "storageBucket": "praxis-module-d53bd.firebasestorage.app",
+  "messagingSenderId": "1042656437075",
+  "measurementId": "",
+  "oAuthClientId": "1042656437075-uu88rr9gnds21f1u4qk4ct6hlfrc9ts3.apps.googleusercontent.com",
+  "recaptchaSiteKey": "",
+  "androidClient": {
+    "projectId": "mediscan-app-3258e",
+    "projectNumber": "935246825239",
+    "packageName": "com.mediscan.app",
+    "appId": "1:935246825239:android:1e853570e64ed8b7021952",
+    "apiKey": "AIzaSyA_KSRDCR9Hv4IhQd_FkfjHTNM8QlnCwPY",
+    "storageBucket": "mediscan-app-3258e.firebasestorage.app"
+  }
+}

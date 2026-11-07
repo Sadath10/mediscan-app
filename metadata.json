@@ -1,0 +1,6 @@
+{
+  "name": "Mediscan-X — AI Medicine Identification, Kannada Assistance & Tablet Reminder",
+  "description": "AI-assisted medicine identification, OCR packaging scanner, verified drug database, Kannada voice assistance, and precision daily tablet dosage reminder engine.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
